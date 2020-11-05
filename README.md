@@ -1,2 +1,2 @@
 # AWS-Lambda-integration
-Layer with Valispace Python API for Lambda function.
+Packaging Lambda function Layers with Valispace Python API and other code dependencies.
