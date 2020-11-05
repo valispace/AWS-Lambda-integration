@@ -1,7 +1,7 @@
 # Building and Packaging a AWS Lambda Layer 
 Packaging Lambda function Layers with Valispace Python API and other code dependencies.
 
-For more on AWS Lambda integration, see the [Documentation page](https://valispace.zendesk.com/knowledge/articles/360015142758/en-us).
+For more on AWS Lambda integration, see the [Documentation page](https://valispace.zendesk.com/hc/en-us/articles/360015142758).
 ### To-do:
 1. Add a basic package layer with numpy and Valispace.
 2. Add a basic Docker base image with numpy and Valispace.
