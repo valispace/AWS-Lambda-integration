@@ -28,7 +28,7 @@ RUN python3.7 -m pip install --upgrade pip && \
 
 `docker build -t "valispace:python_lambda" . `
 
-3. Check docker image list.
+3. Check docker image list
 
 `docker image list`
 
