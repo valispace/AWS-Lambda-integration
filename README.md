@@ -1,4 +1,4 @@
-# Building and Packaging a AWS Lambda Layer 
+# Building and Packaging an AWS Lambda Layer 
 Packaging Lambda function Layers with Valispace Python API and other code dependencies.
 
 For more on AWS Lambda integration, see the [Documentation page](https://valispace.zendesk.com/hc/en-us/articles/360015142758).
