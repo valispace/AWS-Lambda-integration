@@ -1,31 +1,3 @@
-Leveraging AWS Lambda serverless compute to solve complex differential equations and optimization routines
-
-
-
-
-In this tutorial. we use a simple dynamical model of an Electric car with DC motor from this Non-linear models library based on Roger Aarenstrup's DC motor model.
-
-
-
-
-Goal: Update motor current and steady-state parameters (range, velocity, wheel angular velocity etc) when a vali is changed in the model.
-
-
-
-
-Steps:
-1. Configure the Valispace project
-Create a new project in Valispace.
-
-Import components from this archive.
-
-2. Configure Lambda function
-Follow the instructions to configure a Lambda function with AWS API Gateway proxy.
-
-Use this package that contains Valispace, NumPy and Gekko python dependencies, as a layer in the Lambda function. (See how to create custom packages for Lambda layers)
-
-Add the following code to your Lambda function code editor:
-
 import json
 import valispace
 from gekko import GEKKO
@@ -46,24 +18,23 @@ valid_vars = ["i", "dth_m", "th_m", "dth_l", "th_l", "dth_v", "th_v"]
 # th_v : mechanical damping (linear model of friction: bm * dth)
 
 input_valis = {
-"v" : 24542,
-"rm": 24543,
-"lm": 24544,
-"jm": 24547,
-"bm": 24548,
-"jl": 24549,
-"bl": 24550,
-"b": 24552,
-"k": 24551,
-"rl": 24553
-
+    "v" : 24542,
+    "rm": 24543,
+    "lm": 24544,
+    "jm": 24547,
+    "bm": 24548,
+    "jl": 24549,
+    "bl": 24550,
+    "b": 24552,
+    "k": 24551,
+    "rl": 24553
 }
 output_valis = {
-"i": 24555, 
-"dth_m":24556,
-"dth_l":24557,
-"dth_v":24558, 
-"th_v" :24559
+    "i": 24555, 
+    "dth_m":24556,
+    "dth_l":24557,
+    "dth_v":24558, 
+    "th_v" :24559
 }
 def login():
     return valispace.API(url='https://staging.valispace.com/', username = 'kuldeep', password='valispace.')
@@ -85,19 +56,19 @@ def lambda_handler(event, context):
     # add extra filters here so only relevant hooks can trigger the calculations
     vali = login()
     inputs = fetch_input_valis(vali)
-    res = solve_elecar(t_interval=200, inputs)
+    res = solve_elecar(inputs=inputs, t_interval=200)
     push_output_values(vali,res)
 
-return {
-    "statusCode": 200,
-    "headers": {},
-    "body": "",
-    "isBase64Encoded": False
-}
+    return {
+        "statusCode": 200,
+        "headers": {},
+        "body": "",
+        "isBase64Encoded": False
+    }
 
 
 
-def solve_elecar(t_interval=10, inputs):
+def solve_elecar(inputs, t_interval=10):
     m = GEKKO()
 
     #Parameters
@@ -143,10 +114,10 @@ def solve_elecar(t_interval=10, inputs):
 
     res_dict = {}
     for var in valid_vars:
-    res_dict[var] = eval(var).value[-1]
-    res_dict["t"] = m.time
+        res_dict[var] = eval(var).value[-1]
+        res_dict["t"] = m.time
 
-return res_dict
+    return res_dict
 
 
 
