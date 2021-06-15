@@ -37,7 +37,7 @@ output_valis = {
     "th_v" :24559
 }
 def login():
-    return valispace.API(url='https://staging.valispace.com/', username = 'kuldeep', password='valispace.')
+    return valispace.API(url='https://example.valispace.com/', username = 'foo', password='bar.')
 
 def fetch_input_valis(vs_instance):
     values= {}
